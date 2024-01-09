@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -38,8 +41,17 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) {
+    return a;
+  }
+  if (b > a && b > c) {
+    return b;
+  }
+  if (c > a && c > b) {
+    return c;
+  }
+  return a;
 }
 
 /**
@@ -60,8 +72,14 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -82,8 +100,14 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === 0 || b === 0 || c === 0) {
+    return false;
+  }
+  if ((a === b || a === c || b === c) && a + b > c && a + c > b && b + c > a) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -100,8 +124,30 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let str = '';
+  let copyNum = num;
+
+  while (copyNum > 0) {
+    if (copyNum >= 10) {
+      str += 'X';
+      copyNum -= 10;
+    } else if (copyNum >= 9) {
+      str += 'IX';
+      copyNum -= 9;
+    } else if (copyNum >= 5) {
+      str += 'V';
+      copyNum -= 5;
+    } else if (copyNum >= 4) {
+      str += 'IV';
+      copyNum -= 4;
+    } else {
+      str += 'I';
+      copyNum -= 1;
+    }
+  }
+
+  return str;
 }
 
 /**
@@ -119,8 +165,40 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let str = '';
+  const numbers = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '.':
+        str += 'point ';
+        break;
+      case ',':
+        str += 'point ';
+        break;
+      case '-':
+        str += 'minus ';
+        break;
+      default:
+        str += `${numbers[+numberStr[i]]}`;
+        if (i !== numberStr.length - 1) {
+          str += ' ';
+        }
+        break;
+    }
+  }
+  return str;
 }
 
 /**
@@ -135,8 +213,13 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  for (let i = 0; i < Math.floor(str.length / 2); i += 1) {
+    if (str[i] !== str[str.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -153,8 +236,13 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i <= str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +260,20 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let newNum = num;
+  if (digit < 0 || digit > 9) {
+    return digit;
+  }
+
+  while (newNum > 0) {
+    const currentDigit = newNum % 10;
+    if (currentDigit === digit) {
+      return true;
+    }
+    newNum = Math.floor(newNum / 10);
+  }
+  return false;
 }
 
 /**
@@ -189,8 +289,21 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  for (let i = 1; i < arr.length - 1; i += 1) {
+    let leftSum = 0;
+    let rightSum = 0;
+    for (let j = 0; j < i; j += 1) {
+      leftSum += arr[j];
+    }
+    for (let k = i + 1; k < arr.length; k += 1) {
+      rightSum += arr[k];
+    }
+    if (leftSum === rightSum) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -214,8 +327,42 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const arr = [];
+  for (let i = 0; i < size; i += 1) {
+    arr.push([]);
+    for (let j = 0; j < size; j += 1) {
+      arr[i].push(0);
+    }
+  }
+  let counter = 1;
+  let startCol = 0;
+  let endCol = size - 1;
+  let startRow = 0;
+  let endRow = size - 1;
+  while (startCol <= endCol && startRow <= endRow) {
+    for (let i = startCol; i <= endCol; i += 1) {
+      arr[startRow][i] = counter;
+      counter += 1;
+    }
+    startRow += 1;
+    for (let i = startRow; i <= endRow; i += 1) {
+      arr[i][endCol] = counter;
+      counter += 1;
+    }
+    endCol -= 1;
+    for (let i = endCol; i >= startCol; i -= 1) {
+      arr[endRow][i] = counter;
+      counter += 1;
+    }
+    endRow -= 1;
+    for (let i = endRow; i >= startRow; i -= 1) {
+      arr[i][startCol] = counter;
+      counter += 1;
+    }
+    startCol += 1;
+  }
+  return arr;
 }
 
 /**
@@ -233,8 +380,22 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const arr = [];
+  for (let i = 0; i < matrix.length; i += 1) {
+    arr.push([]);
+    for (let j = 0; j < matrix.length; j += 1) {
+      arr[i].push(0);
+    }
+  }
+  let counter = 0;
+  for (let i = matrix.length - 1; i >= 0; i -= 1) {
+    for (let j = 0; j < matrix.length; j += 1) {
+      arr[j][counter] = matrix[i][j];
+    }
+    counter += 1;
+  }
+  return arr;
 }
 
 /**
@@ -253,6 +414,22 @@ function rotateMatrix(/* matrix */) {
  */
 function sortByAsc(/* arr */) {
   throw new Error('Not implemented');
+  // const sortedArr = [...arr];
+  // for (let i = 0; i < sortedArr.length; i += 1) {
+  //   let indexMin = i;
+  //   for (let j = i + 1; j < sortedArr.length; j += 1) {
+  //     if (sortedArr[j] < sortedArr[indexMin]) {
+  //       indexMin = j;
+  //     }
+  //   }
+  //   // Swap the elements
+  //   if (i !== indexMin) {
+  //     const temp = sortedArr[i];
+  //     sortedArr[i] = sortedArr[indexMin];
+  //     sortedArr[indexMin] = temp;
+  //   }
+  // }
+  // return sortedArr;
 }
 
 /**
@@ -272,8 +449,23 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  const arr = str.split('');
+  let count = 0;
+  while (count < iterations) {
+    const newArr = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (i % 2 !== 0) {
+        newArr.push(arr[i]);
+      } else {
+        newArr.unshift(arr[i]);
+      }
+    }
+    arr.length = 0;
+    arr.push(...newArr);
+    count += 1;
+  }
+  return arr.join('');
 }
 
 /**
@@ -293,8 +485,32 @@ function shuffleChar(/* str, iterations */) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  if (number < 10) {
+    return number;
+  }
+  const arr = number.toString().split('');
+  let index = -1;
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    if (+arr[i] > +arr[i - 1]) {
+      index = i - 1;
+      break;
+    }
+  }
+  if (index === -1) {
+    return number;
+  }
+  const rightPart = arr.splice(index);
+  const min = Math.min(...rightPart.filter((el) => el > rightPart[0]));
+  const minIndex = rightPart.indexOf(min);
+  rightPart.splice(minIndex, 1);
+  rightPart.push(min);
+  rightPart.sort((a, b) => a - b);
+  const result = +[...arr, ...rightPart].join('');
+  if (result > number) {
+    return result;
+  }
+  return number;
 }
 
 module.exports = {
